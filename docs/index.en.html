@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>legal-dd-verify · Legal Due-Diligence Document Verification Pipeline</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #5b6470; --line: #e3e8ef;
+    --brand: #1f6feb; --brand-soft: #eaf2ff; --ok: #1a7f37; --warn: #9a6700;
+    --code-bg: #f4f6fa;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.65; font-size: 16px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 24px; margin-bottom: 32px; }
+  h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); font-size: 16px; margin: 0 0 16px; }
+  .lang { margin: 0 0 14px; font-size: 14px; }
+  .lang a { font-weight: 600; }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 600; border: 1px solid var(--line);
+    background: var(--brand-soft); color: var(--brand);
+  }
+  .badge.mit { background: #fff7e6; color: var(--warn); border-color: #f5e2b3; }
+  .badge.py  { background: #eaf7ee; color: var(--ok); border-color: #bfe6ca; }
+  h2 { font-size: 21px; margin: 40px 0 12px; padding-top: 8px; border-top: 1px solid var(--line); }
+  h3 { font-size: 16px; margin: 22px 0 8px; }
+  p { margin: 10px 0; }
+  a { color: var(--brand); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, pre { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; }
+  code { background: var(--code-bg); padding: 2px 6px; border-radius: 5px; font-size: 14px; }
+  pre {
+    background: var(--code-bg); padding: 16px; border-radius: 10px; overflow: auto;
+    font-size: 13.5px; line-height: 1.5; border: 1px solid var(--line);
+  }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 15px; }
+  th, td { text-align: left; padding: 9px 12px; border: 1px solid var(--line); vertical-align: top; }
+  th { background: #f7f9fc; font-weight: 600; }
+  .note {
+    background: #fbfcfe; border: 1px solid var(--line); border-left: 4px solid var(--brand);
+    padding: 12px 16px; border-radius: 8px; margin: 16px 0; font-size: 14.5px; color: var(--muted);
+  }
+  .warn {
+    background: #fff8f0; border: 1px solid #f3d8b6; border-left: 4px solid var(--warn);
+    padding: 12px 16px; border-radius: 8px; margin: 16px 0; font-size: 14.5px;
+  }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 13.5px; }
+  .pill { display:inline-block; background:#eaf2ff; color:#1f6feb; border-radius:6px;
+    padding:1px 7px; font-size:13px; font-weight:600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>legal-dd-verify</h1>
+    <p class="sub">A data-driven legal due-diligence document verification &amp; supplement-request pipeline</p>
+    <p class="lang"><a href="index.html">→ 中文版本</a></p>
+    <div class="badges">
+      <span class="badge">CI: GitHub Actions</span>
+      <span class="badge mit">License: MIT</span>
+      <span class="badge py">Python 3.11 / 3.13</span>
+      <span class="badge">Offline · zero pip</span>
+    </div>
+  </header>
+
+  <p><strong>legal-dd-verify</strong> reads a due-diligence checklist and a virtual data room (VDR),
+  verifies document provision item by item, detects <strong>cross-file contradictions</strong>, generates
+  supplement requests and key-issue memos, and emits
+  <span class="pill">4 machine-readable deliverables</span>.
+  The whole pipeline runs <strong>offline with zero installation</strong>: dependencies are vendored in
+  <code>vendor/</code>, so no <code>pip install</code> and no network access are required at runtime.</p>
+
+  <div class="note">
+    This repository is a <strong>complete, runnable worked example (reference implementation)</strong> bound to an
+    <strong>originally synthesized</strong> fictional demo data room ("Yunqi Zhilian Technology Co., Ltd.") and a
+    generic checklist. All entities, people, contracts, accounts, addresses, and transaction data are synthetic,
+    and are unrelated to any real party, real project, or third-party question bank.
+  </div>
+
+  <h2>What problem it solves</h2>
+  <p>The most underestimated workload in due diligence is reconciling a pile of PDF / XLSX / DOCX materials
+  from the target company against a long checklist, line by line:</p>
+  <ul>
+    <li><strong>Was this document provided?</strong> To what extent (satisfied / partially satisfied / not satisfied)?</li>
+    <li><strong>Do different files contradict each other?</strong> (articles say 10% equity, the ledger says 8%; the privacy policy says no cross-border data transfer, yet the cloud bill shows a Singapore node holding personal data)</li>
+    <li>Which <strong>claims / disputes were omitted</strong> from the dispute list?</li>
+    <li>Which <strong>documents are still missing</strong> and need a supplement request?</li>
+  </ul>
+  <p><code>legal-dd-verify</code> turns these steps into a reproducible pipeline, so lawyers can focus on
+  "judgment and negotiation" rather than "flipping files and filling forms."</p>
+
+  <h2>Pipeline structure</h2>
+  <table>
+    <tr><th>Stage</th><th>Module</th><th>Responsibility</th></tr>
+    <tr><td>Extract</td><td><code>pipeline/extract.py</code></td><td>Reads PDF / XLSX / DOCX (or offline <code>.txt</code> extracted views) and builds a material store keyed by the stable <code>XX.Y</code> document prefix</td></tr>
+    <tr><td>Analyze</td><td><code>pipeline/analyze.py</code></td><td>52-item verification + structural cross-file contradiction detection (no hardcoded answers)</td></tr>
+    <tr><td>Render</td><td><code>pipeline/render.py</code></td><td>Generates the 4 deliverables</td></tr>
+    <tr><td>Verify</td><td><code>pipeline/verify.py</code></td><td>Independent verifier: resolves citations, validates enums and core-risk coverage</td></tr>
+    <tr><td>Orchestrate</td><td><code>pipeline/run.py</code></td><td>Chains the four layers; supports <code>--verify</code> self-check</td></tr>
+  </table>
+
+  <h2>Pipeline diagram</h2>
+  <p><img src="pipeline.svg" alt="legal-dd-verify pipeline diagram"
+    style="max-width:100%; border:1px solid var(--line); border-radius:10px;" /></p>
+
+  <h2>Deliverables</h2>
+  <table>
+    <tr><th>File</th><th>Content</th></tr>
+    <tr><td><code>尽调清单核验与反馈表.xlsx</code></td><td>52-item verification: status / fact summary / evidence location (to the file) / gap / risk level / disposition / needs-human-review</td></tr>
+    <tr><td><code>补件问询清单.xlsx</code></td><td>Deduplicated supplement requests with type and basis</td></tr>
+    <tr><td><code>重点问题摘要.docx</code></td><td>Scope &amp; review / executive summary / cross-file contradictions / statistics / key issues / prioritized supplements &amp; next steps</td></tr>
+    <tr><td><code>result_manifest.json</code></td><td>Machine-readable list: items / key_issues / cross_file_contradictions</td></tr>
+  </table>
+
+  <h2>Quick start</h2>
+  <pre># After clone — no pip install, no network
+cd legal-dd-verify
+
+# End-to-end run (extract -> analyze -> render -> verify)
+python3 pipeline/run.py \
+  --input materials \
+  --checklist checklist/checklist_52.json \
+  --out out \
+  --verify
+
+# Offline smoke test (same command as GitHub CI)
+python3 tests/smoke_test.py</pre>
+  <p>Expected output includes <code>RESULT: PASS</code>: 52 unique items, 3 structural contradictions,
+  4 core-risk categories fully covered, 0 unresolved citations.</p>
+
+  <h2>Honest boundaries</h2>
+  <div class="warn">
+    <ul style="margin:8px 0;">
+      <li>This repo is a <strong>methodology worked example</strong> bound to an original synthetic demo data room; the demo data room is unrelated to any real party / project / third-party question bank.</li>
+      <li>Output is <strong>lawyer-supportive analysis</strong>, not an independent legal opinion, and does not replace independent verification against registries, authorities, and counterparties.</li>
+      <li>The engine is <strong>bound to the demo data room's document structure</strong>; using it on real projects with different structures requires extending fact extraction and contradiction rules. It is not an "out-of-the-box generic product."</li>
+    </ul>
+  </div>
+
+  <h2>License &amp; author</h2>
+  <p>Released under the <strong>MIT License</strong> (see <code>LICENSE</code>).</p>
+  <p>Author: <strong>vickywu97</strong> (Lawyer · Tax Advisor · Patent Attorney, six years of legal practice; currently working in AI legal products).</p>
+  <p>Contact: <a href="https://www.linkedin.com/in/wuyitong">LinkedIn</a> · <a href="mailto:vickywu97@163.com">vickywu97@163.com</a></p>
+  <p>Source: <a href="https://github.com/vickywu97/legal-dd-verify">github.com/vickywu97/legal-dd-verify</a></p>
+
+  <footer>
+    legal-dd-verify · MIT License · original synthetic demo data room, unrelated to any real party / third-party question bank.
+  </footer>
+</div>
+</body>
+</html>
