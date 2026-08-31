@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 330" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5b6470"/>
+    </marker>
+  </defs>
+
+  <!-- title -->
+  <text x="20" y="36" font-size="17" font-weight="700" fill="#1a1a1a">legal-dd-verify 流水线：抽取 → 分析 → 渲染 → 校验</text>
+
+  <!-- arrows -->
+  <line x1="170" y1="165" x2="207" y2="165" stroke="#5b6470" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="380" y1="165" x2="397" y2="165" stroke="#5b6470" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="570" y1="165" x2="587" y2="165" stroke="#5b6470" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="760" y1="165" x2="777" y2="165" stroke="#5b6470" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <line x1="950" y1="165" x2="977" y2="165" stroke="#5b6470" stroke-width="1.6" marker-end="url(#arrow)"/>
+
+  <!-- input -->
+  <rect x="20" y="120" width="150" height="90" rx="10" fill="#f4f6fa" stroke="#5b6470" stroke-width="1.4"/>
+  <text x="95" y="146" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">输入</text>
+  <text x="95" y="169" font-size="11" fill="#33414f" text-anchor="middle">checklist_52.json</text>
+  <text x="95" y="187" font-size="11" fill="#33414f" text-anchor="middle">materials/ (VDR)</text>
+
+  <!-- stage 1 -->
+  <rect x="210" y="120" width="170" height="90" rx="10" fill="#eaf2ff" stroke="#1f6feb" stroke-width="1.4"/>
+  <text x="295" y="146" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">① 抽取</text>
+  <text x="295" y="168" font-size="11" fill="#33414f" text-anchor="middle">extract.py</text>
+  <text x="295" y="186" font-size="11" fill="#33414f" text-anchor="middle">按 XX.Y 建资料库</text>
+
+  <!-- stage 2 -->
+  <rect x="400" y="120" width="170" height="90" rx="10" fill="#eaf2ff" stroke="#1f6feb" stroke-width="1.4"/>
+  <text x="485" y="144" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">② 分析</text>
+  <text x="485" y="163" font-size="11" fill="#33414f" text-anchor="middle">analyze.py</text>
+  <text x="485" y="180" font-size="11" fill="#33414f" text-anchor="middle">52 项核验</text>
+  <text x="485" y="197" font-size="11" fill="#33414f" text-anchor="middle">跨文件矛盾检测</text>
+
+  <!-- stage 3 -->
+  <rect x="590" y="120" width="170" height="90" rx="10" fill="#eaf2ff" stroke="#1f6feb" stroke-width="1.4"/>
+  <text x="675" y="146" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">③ 渲染</text>
+  <text x="675" y="168" font-size="11" fill="#33414f" text-anchor="middle">render.py</text>
+  <text x="675" y="186" font-size="11" fill="#33414f" text-anchor="middle">生成 4 件交付物</text>
+
+  <!-- stage 4 -->
+  <rect x="780" y="120" width="170" height="90" rx="10" fill="#eaf2ff" stroke="#1f6feb" stroke-width="1.4"/>
+  <text x="865" y="144" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">④ 校验</text>
+  <text x="865" y="163" font-size="11" fill="#33414f" text-anchor="middle">verify.py</text>
+  <text x="865" y="180" font-size="11" fill="#33414f" text-anchor="middle">独立校验器</text>
+  <text x="865" y="197" font-size="11" fill="#33414f" text-anchor="middle">反向解析引用</text>
+
+  <!-- output -->
+  <rect x="980" y="110" width="156" height="210" rx="10" fill="#f4f6fa" stroke="#5b6470" stroke-width="1.4"/>
+  <text x="1058" y="136" font-size="14" font-weight="700" fill="#1a1a1a" text-anchor="middle">交付物</text>
+  <text x="1058" y="166" font-size="11" fill="#33414f" text-anchor="middle">• 核验总表.xlsx</text>
+  <text x="1058" y="190" font-size="11" fill="#33414f" text-anchor="middle">• 补件问询.xlsx</text>
+  <text x="1058" y="214" font-size="11" fill="#33414f" text-anchor="middle">• 重点问题.docx</text>
+  <text x="1058" y="238" font-size="11" fill="#33414f" text-anchor="middle">• manifest.json</text>
+  <text x="1058" y="270" font-size="10.5" fill="#9a6700" text-anchor="middle">机器可读 · 可审计</text>
+
+  <!-- run.py orchestration bar -->
+  <rect x="210" y="240" width="740" height="34" rx="8" fill="#eef1f5" stroke="#5b6470" stroke-width="1.2"/>
+  <text x="580" y="262" font-size="12.5" fill="#33414f" text-anchor="middle">pipeline/run.py — 串联四层引擎（支持 --verify 自检）</text>
+</svg>

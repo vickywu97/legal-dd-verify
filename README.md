@@ -4,6 +4,8 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.13-blue.svg)
 
+![legal-dd-verify 流水线](docs/pipeline.svg)
+
 一个**数据驱动**的法律尽职调查资料核验流水线：读取一份 52 项尽职调查清单与一个虚拟资料室（VDR），逐项核验资料提供情况、识别跨文件矛盾、生成补件问询与重点问题，并输出 4 件机器可读的标准化交付物。
 
 > 本仓库是**一个完整、可运行的工作示例（reference implementation）**：它绑定了一份我**从零原创**的虚构演示数据室（"云栖智联科技股份有限公司"）与一份通用核查清单。全部主体、人员、合同、账号、地址与交易数据均为合成信息，与任何真实主体、真实项目或第三方题库无关。
