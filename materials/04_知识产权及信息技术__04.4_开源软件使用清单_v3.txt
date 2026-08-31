@@ -1,0 +1,8 @@
+# XLSX: 04.4_开源软件使用清单_v3
+
+## SHEET: 开源组件  (rows=5, cols=6)
+A4=组件 | B4=许可证 | C4=是否修改 | D4=网络交互 | E4=是否分发 | F4=内部评级
+A5=TensorFlow | B5=Apache-2.0 | C5=否 | D5=否 | E5=否 | F5=低
+A6=PostgreSQL | B6=PostgreSQL | C6=否 | D6=否 | E6=否 | F6=低
+A7=MinIO | B7=AGPL-3.0 | C7=是 | D7=是（对象存储网关） | E7=否 | F7=中
+A8=VectorDB-X | B8=SSPL-1.0 | C8=否 | D8=是（检索服务） | E8=否 | F8=中

@@ -1,0 +1,760 @@
+{
+  "task_id": "legal-dd-verify",
+  "instance_id": "demo",
+  "cutoff_date": "2026-07-15",
+  "target_name": "云栖智联科技股份有限公司",
+  "checklist_count": 52,
+  "items": [
+    {
+      "item_id": "CORP-01",
+      "status": "已满足",
+      "risk_level": "LOW",
+      "evidence": [
+        "01_主体资格及历史沿革__01.1_登记事项及关键变更档案_20260710｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "CORP-02",
+      "status": "已满足",
+      "risk_level": "LOW",
+      "evidence": [
+        "01_主体资格及历史沿革__01.1_登记事项及关键变更档案_20260710｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "CORP-03",
+      "status": "已满足",
+      "risk_level": "LOW",
+      "evidence": [
+        "01_主体资格及历史沿革__01.1_登记事项及关键变更档案_20260710｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "CORP-04",
+      "status": "已满足",
+      "risk_level": "LOW",
+      "evidence": [
+        "01_主体资格及历史沿革__01.1_登记事项及关键变更档案_20260710｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "CORP-05",
+      "status": "已满足",
+      "risk_level": "LOW",
+      "evidence": [
+        "01_主体资格及历史沿革__01.1_登记事项及关键变更档案_20260710｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "CORP-06",
+      "status": "已满足",
+      "risk_level": "LOW",
+      "evidence": [
+        "01_主体资格及历史沿革__01.1_登记事项及关键变更档案_20260710｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "CORP-07",
+      "status": "已满足",
+      "risk_level": "LOW",
+      "evidence": [
+        "01_主体资格及历史沿革__01.1_登记事项及关键变更档案_20260710｜正文"
+      ],
+      "feedback_ids": [
+        "F-13"
+      ]
+    },
+    {
+      "item_id": "CAP-01",
+      "status": "资料冲突",
+      "risk_level": "HIGH",
+      "evidence": [
+        "01_主体资格及历史沿革__01.1_登记事项及关键变更档案_20260710",
+        "01_主体资格及历史沿革__01.2_公司章程_202409修订_签署版",
+        "02_股权及公司治理__02.1_股权结构及历次变动台账_20260712",
+        "02_股权及公司治理__02.3_2024股权转让及决议文件汇编"
+      ],
+      "feedback_ids": [
+        "F-01"
+      ]
+    },
+    {
+      "item_id": "CAP-02",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "02_股权及公司治理__02.1_股权结构及历次变动台账_20260712｜正文"
+      ],
+      "feedback_ids": [
+        "F-01",
+        "F-02"
+      ]
+    },
+    {
+      "item_id": "CAP-03",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "02_股权及公司治理__02.1_股权结构及历次变动台账_20260712｜正文"
+      ],
+      "feedback_ids": [
+        "F-01"
+      ]
+    },
+    {
+      "item_id": "CAP-04",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "02_股权及公司治理__02.1_股权结构及历次变动台账_20260712｜正文"
+      ],
+      "feedback_ids": [
+        "F-01"
+      ]
+    },
+    {
+      "item_id": "CAP-05",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "02_股权及公司治理__02.1_股权结构及历次变动台账_20260712｜正文"
+      ],
+      "feedback_ids": [
+        "F-01"
+      ]
+    },
+    {
+      "item_id": "CAP-06",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "02_股权及公司治理__02.1_股权结构及历次变动台账_20260712｜正文"
+      ],
+      "feedback_ids": [
+        "F-01"
+      ]
+    },
+    {
+      "item_id": "GOV-01",
+      "status": "已满足",
+      "risk_level": "LOW",
+      "evidence": [
+        "02_股权及公司治理__02.4_治理决议汇编_2024-2026｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "GOV-02",
+      "status": "部分满足",
+      "risk_level": "MEDIUM",
+      "evidence": [
+        "02_股权及公司治理__02.4_治理决议汇编_2024-2026｜正文"
+      ],
+      "feedback_ids": [
+        "F-04"
+      ]
+    },
+    {
+      "item_id": "GOV-03",
+      "status": "已满足",
+      "risk_level": "LOW",
+      "evidence": [
+        "02_股权及公司治理__02.4_治理决议汇编_2024-2026｜正文"
+      ],
+      "feedback_ids": [
+        "F-14"
+      ]
+    },
+    {
+      "item_id": "GOV-04",
+      "status": "已满足",
+      "risk_level": "LOW",
+      "evidence": [
+        "02_股权及公司治理__02.4_治理决议汇编_2024-2026｜正文"
+      ],
+      "feedback_ids": [
+        "F-19"
+      ]
+    },
+    {
+      "item_id": "GOV-05",
+      "status": "已满足",
+      "risk_level": "LOW",
+      "evidence": [
+        "02_股权及公司治理__02.4_治理决议汇编_2024-2026｜正文"
+      ],
+      "feedback_ids": [
+        "F-20"
+      ]
+    },
+    {
+      "item_id": "CON-01",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "03_重大合同及融资__03.1_重大合同台账_20260712｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "CON-02",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "03_重大合同及融资__03.1_重大合同台账_20260712｜正文"
+      ],
+      "feedback_ids": [
+        "F-05",
+        "F-10"
+      ]
+    },
+    {
+      "item_id": "CON-03",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "03_重大合同及融资__03.1_重大合同台账_20260712｜正文"
+      ],
+      "feedback_ids": [
+        "F-10"
+      ]
+    },
+    {
+      "item_id": "CON-04",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "03_重大合同及融资__03.1_重大合同台账_20260712｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "CON-05",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "03_重大合同及融资__03.1_重大合同台账_20260712｜正文"
+      ],
+      "feedback_ids": [
+        "F-05"
+      ]
+    },
+    {
+      "item_id": "CON-06",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "03_重大合同及融资__03.1_重大合同台账_20260712｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "CON-07",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "03_重大合同及融资__03.1_重大合同台账_20260712｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "CON-08",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "03_重大合同及融资__03.1_重大合同台账_20260712｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "IP-01",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "04_知识产权及信息技术__04.1_知识产权清单_202607｜正文"
+      ],
+      "feedback_ids": [
+        "F-03"
+      ]
+    },
+    {
+      "item_id": "IP-02",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "04_知识产权及信息技术__04.1_知识产权清单_202607｜正文"
+      ],
+      "feedback_ids": [
+        "F-03"
+      ]
+    },
+    {
+      "item_id": "IP-03",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "04_知识产权及信息技术__04.1_知识产权清单_202607｜正文"
+      ],
+      "feedback_ids": [
+        "F-03"
+      ]
+    },
+    {
+      "item_id": "IP-04",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "04_知识产权及信息技术__04.1_知识产权清单_202607｜正文"
+      ],
+      "feedback_ids": [
+        "F-03",
+        "F-11"
+      ]
+    },
+    {
+      "item_id": "IP-05",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "04_知识产权及信息技术__04.1_知识产权清单_202607｜正文"
+      ],
+      "feedback_ids": [
+        "F-03",
+        "F-11"
+      ]
+    },
+    {
+      "item_id": "IP-06",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "04_知识产权及信息技术__04.1_知识产权清单_202607｜正文"
+      ],
+      "feedback_ids": [
+        "F-03"
+      ]
+    },
+    {
+      "item_id": "IP-07",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "04_知识产权及信息技术__04.1_知识产权清单_202607｜正文"
+      ],
+      "feedback_ids": [
+        "F-03"
+      ]
+    },
+    {
+      "item_id": "HR-01",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "05_劳动人事__05.1_员工名册及社保情况_202606｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "HR-02",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "05_劳动人事__05.1_员工名册及社保情况_202606｜正文"
+      ],
+      "feedback_ids": [
+        "F-07"
+      ]
+    },
+    {
+      "item_id": "HR-03",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "05_劳动人事__05.1_员工名册及社保情况_202606｜正文"
+      ],
+      "feedback_ids": [
+        "F-12"
+      ]
+    },
+    {
+      "item_id": "HR-04",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "05_劳动人事__05.1_员工名册及社保情况_202606｜正文"
+      ],
+      "feedback_ids": []
+    },
+    {
+      "item_id": "HR-05",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "05_劳动人事__05.1_员工名册及社保情况_202606｜正文"
+      ],
+      "feedback_ids": [
+        "F-07"
+      ]
+    },
+    {
+      "item_id": "DATA-01",
+      "status": "部分满足",
+      "risk_level": "MEDIUM",
+      "evidence": [
+        "06_数据合规及业务资质__06.1_隐私政策与数据处理说明_2026｜正文"
+      ],
+      "feedback_ids": [
+        "F-08"
+      ]
+    },
+    {
+      "item_id": "DATA-02",
+      "status": "部分满足",
+      "risk_level": "MEDIUM",
+      "evidence": [
+        "06_数据合规及业务资质__06.1_隐私政策与数据处理说明_2026｜正文"
+      ],
+      "feedback_ids": [
+        "F-08"
+      ]
+    },
+    {
+      "item_id": "DATA-03",
+      "status": "资料冲突",
+      "risk_level": "HIGH",
+      "evidence": [
+        "06_数据合规及业务资质__06.1_隐私政策与数据处理说明_2026",
+        "06_数据合规及业务资质__06.2_云服务账单及资源区域_202601-06"
+      ],
+      "feedback_ids": [
+        "F-08"
+      ]
+    },
+    {
+      "item_id": "DATA-04",
+      "status": "部分满足",
+      "risk_level": "MEDIUM",
+      "evidence": [
+        "06_数据合规及业务资质__06.1_隐私政策与数据处理说明_2026｜正文"
+      ],
+      "feedback_ids": [
+        "F-08"
+      ]
+    },
+    {
+      "item_id": "DATA-05",
+      "status": "部分满足",
+      "risk_level": "MEDIUM",
+      "evidence": [
+        "06_数据合规及业务资质__06.1_隐私政策与数据处理说明_2026｜正文"
+      ],
+      "feedback_ids": [
+        "F-08"
+      ]
+    },
+    {
+      "item_id": "DATA-06",
+      "status": "部分满足",
+      "risk_level": "MEDIUM",
+      "evidence": [
+        "06_数据合规及业务资质__06.1_隐私政策与数据处理说明_2026｜正文"
+      ],
+      "feedback_ids": [
+        "F-08"
+      ]
+    },
+    {
+      "item_id": "REG-01",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "06_数据合规及业务资质__06.3_业务许可证及认证汇编｜正文"
+      ],
+      "feedback_ids": [
+        "F-06"
+      ]
+    },
+    {
+      "item_id": "REG-02",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "06_数据合规及业务资质__06.3_业务许可证及认证汇编｜正文"
+      ],
+      "feedback_ids": [
+        "F-06",
+        "F-18"
+      ]
+    },
+    {
+      "item_id": "REG-03",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "06_数据合规及业务资质__06.3_业务许可证及认证汇编｜正文"
+      ],
+      "feedback_ids": [
+        "F-06",
+        "F-18"
+      ]
+    },
+    {
+      "item_id": "DISP-01",
+      "status": "资料冲突",
+      "risk_level": "HIGH",
+      "evidence": [
+        "03_重大合同及融资__03.1_重大合同台账_20260712",
+        "07_争议债务及保险__07.3_供应商索赔律师函_20260618",
+        "07_争议债务及保险__07.1_诉讼仲裁及或有负债清单_202607"
+      ],
+      "feedback_ids": [
+        "F-09"
+      ]
+    },
+    {
+      "item_id": "DISP-02",
+      "status": "部分满足",
+      "risk_level": "HIGH",
+      "evidence": [
+        "07_争议债务及保险__07.1_诉讼仲裁及或有负债清单_202607｜正文"
+      ],
+      "feedback_ids": [
+        "F-09"
+      ]
+    },
+    {
+      "item_id": "DISP-03",
+      "status": "未满足",
+      "risk_level": "MEDIUM",
+      "evidence": [
+        "未发现可支持资料（VDR：—）"
+      ],
+      "feedback_ids": [
+        "F-09",
+        "F-15"
+      ]
+    },
+    {
+      "item_id": "PROP-01",
+      "status": "已满足",
+      "risk_level": "LOW",
+      "evidence": [
+        "08_物业及其他__08.1_研发场地租赁合同及补充协议｜正文"
+      ],
+      "feedback_ids": [
+        "F-05",
+        "F-16"
+      ]
+    },
+    {
+      "item_id": "PROP-02",
+      "status": "未满足",
+      "risk_level": "MEDIUM",
+      "evidence": [
+        "未发现可支持资料（VDR：—）"
+      ],
+      "feedback_ids": [
+        "F-17"
+      ]
+    }
+  ],
+  "key_issues": [
+    {
+      "issue_id": "K-01",
+      "title": "股权结构多源比例不一致",
+      "risk_level": "HIGH",
+      "disposition": "CP",
+      "related_items": [
+        "CAP-01",
+        "CORP-03",
+        "CAP-04",
+        "CAP-05"
+      ],
+      "evidence": "01_主体资格及历史沿革__01.1_登记事项及关键变更档案_20260710；01_主体资格及历史沿革__01.2_公司章程_202409修订_签署版；02_股权及公司治理__02.1_股权结构及历次变动台账_20260712；02_股权及公司治理__02.3_2024股权转让及决议文件汇编"
+    },
+    {
+      "issue_id": "K-02",
+      "title": "数据跨境表述与云架构不一致",
+      "risk_level": "HIGH",
+      "disposition": "RFI",
+      "related_items": [
+        "DATA-03",
+        "DATA-05"
+      ],
+      "evidence": "06_数据合规及业务资质__06.1_隐私政策与数据处理说明_2026；06_数据合规及业务资质__06.2_云服务账单及资源区域_202601-06"
+    },
+    {
+      "issue_id": "K-03",
+      "title": "重大索赔未入争议/或有负债清单",
+      "risk_level": "HIGH",
+      "disposition": "INDEMNITY",
+      "related_items": [
+        "DISP-01",
+        "DISP-02",
+        "CON-08"
+      ],
+      "evidence": "03_重大合同及融资__03.1_重大合同台账_20260712；07_争议债务及保险__07.3_供应商索赔律师函_20260618；07_争议债务及保险__07.1_诉讼仲裁及或有负债清单_202607"
+    },
+    {
+      "issue_id": "K-04",
+      "title": "控股股东出资未实缴",
+      "risk_level": "HIGH",
+      "disposition": "CP",
+      "related_items": [
+        "CAP-02"
+      ],
+      "evidence": "02_股权及公司治理__02.1_股权结构及历次变动台账_20260712｜正文"
+    },
+    {
+      "issue_id": "K-05",
+      "title": "控制权变更触发重大合同/融资/租赁限制",
+      "risk_level": "HIGH",
+      "disposition": "COVENANT",
+      "related_items": [
+        "CON-02",
+        "CON-05",
+        "PROP-01"
+      ],
+      "evidence": "CON-02：03_重大合同及融资__03.1_重大合同台账_20260712｜正文\nCON-05：03_重大合同及融资__03.1_重大合同台账_20260712｜正文\nPROP-01：08_物业及其他__08.1_研发场地租赁合同及补充协议｜正文"
+    },
+    {
+      "issue_id": "K-06",
+      "title": "董事会决议法定人数瑕疵",
+      "risk_level": "HIGH",
+      "disposition": "CP",
+      "related_items": [
+        "GOV-02",
+        "GOV-03",
+        "CON-05"
+      ],
+      "evidence": "02_股权及公司治理__02.4_治理决议汇编_2024-2026｜正文"
+    },
+    {
+      "issue_id": "K-07",
+      "title": "增值电信许可证过期仍经营SaaS",
+      "risk_level": "HIGH",
+      "disposition": "CP",
+      "related_items": [
+        "REG-01"
+      ],
+      "evidence": "06_数据合规及业务资质__06.3_业务许可证及认证汇编｜正文"
+    },
+    {
+      "issue_id": "K-08",
+      "title": "CTO劳动合同未签署且无IP协议",
+      "risk_level": "HIGH",
+      "disposition": "CP",
+      "related_items": [
+        "HR-02",
+        "HR-05",
+        "IP-03"
+      ],
+      "evidence": "05_劳动人事__05.1_员工名册及社保情况_202606｜正文"
+    },
+    {
+      "issue_id": "K-09",
+      "title": "关联交易无正式协议（核心IP使用安排）",
+      "risk_level": "MEDIUM",
+      "disposition": "INDEMNITY",
+      "related_items": [
+        "CON-07",
+        "IP-01"
+      ],
+      "evidence": "04_知识产权及信息技术__04.1_知识产权清单_202607｜正文"
+    },
+    {
+      "issue_id": "K-10",
+      "title": "开源AGPL/SSPL合规待复核",
+      "risk_level": "MEDIUM",
+      "disposition": "MONITOR",
+      "related_items": [
+        "IP-04",
+        "IP-05"
+      ],
+      "evidence": "04_知识产权及信息技术__04.4_开源软件使用清单_v3｜正文"
+    },
+    {
+      "issue_id": "K-11",
+      "title": "研发场地租赁临近到期且COC同意缺失",
+      "risk_level": "MEDIUM",
+      "disposition": "COVENANT",
+      "related_items": [
+        "PROP-01"
+      ],
+      "evidence": "08_物业及其他__08.1_研发场地租赁合同及补充协议｜正文"
+    },
+    {
+      "issue_id": "K-12",
+      "title": "近年年度报告与合规处罚专项说明待补",
+      "risk_level": "LOW",
+      "disposition": "RFI",
+      "related_items": [
+        "CORP-07",
+        "REG-02"
+      ],
+      "evidence": "01_主体资格及历史沿革__01.1_登记事项及关键变更档案_20260710｜正文"
+    }
+  ],
+  "cross_file_contradictions": [
+    {
+      "contradiction_id": "CT-01",
+      "severity": "HIGH",
+      "title": "股权结构多源比例不一致",
+      "conflicting_files": [
+        "01_主体资格及历史沿革__01.1_登记事项及关键变更档案_20260710",
+        "01_主体资格及历史沿革__01.2_公司章程_202409修订_签署版",
+        "02_股权及公司治理__02.1_股权结构及历次变动台账_20260712",
+        "02_股权及公司治理__02.3_2024股权转让及决议文件汇编"
+      ],
+      "related_items": [
+        "CAP-01",
+        "CORP-03",
+        "CAP-04",
+        "CAP-05"
+      ],
+      "resolution": "以登记机关备案文本统一股权比例，由转让方提供更正说明、历史转让对价支付凭证及出资期限说明，并作为交易先决条件（F-01）。"
+    },
+    {
+      "contradiction_id": "CT-02",
+      "severity": "HIGH",
+      "title": "数据跨境表述与云架构实际部署不一致",
+      "conflicting_files": [
+        "06_数据合规及业务资质__06.1_隐私政策与数据处理说明_2026",
+        "06_数据合规及业务资质__06.2_云服务账单及资源区域_202601-06"
+      ],
+      "related_items": [
+        "DATA-03",
+        "DATA-05"
+      ],
+      "resolution": "要求目标公司澄清上述境外资源的数据属性（是否含个人信息/重要数据）、接收方与传输目的，补充跨境传输字段清单、告知同意记录、与境外接收方签订的标准合同/安全评估及个人信息保护影响评估（PIA）文件，作为事实问询并纳入陈述保证（F-08）。"
+    },
+    {
+      "contradiction_id": "CT-03",
+      "severity": "HIGH",
+      "title": "重大索赔/争议未纳入争议与或有负债清单",
+      "conflicting_files": [
+        "03_重大合同及融资__03.1_重大合同台账_20260712",
+        "07_争议债务及保险__07.3_供应商索赔律师函_20260618",
+        "07_争议债务及保险__07.1_诉讼仲裁及或有负债清单_202607"
+      ],
+      "related_items": [
+        "DISP-01",
+        "DISP-02",
+        "CON-08"
+      ],
+      "resolution": "将遗漏索赔补入争议/或有负债清单并说明原因，纳入赔偿（indemnity）事项（F-09）。"
+    }
+  ],
+  "generated_files": [
+    "尽调清单核验与反馈表.xlsx",
+    "补充资料及问询清单.xlsx",
+    "重点问题摘要.docx",
+    "result_manifest.json"
+  ]
+}

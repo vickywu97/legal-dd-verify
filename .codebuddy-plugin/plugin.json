@@ -1,0 +1,22 @@
+{
+  "name": "legal-dd-verify",
+  "version": "1.0.0",
+  "displayName": "legal-dd-verify 尽职调查资料核验流水线",
+  "description": "数据驱动的尽职调查资料清单核验与补件反馈流水线：读取尽调资料清单（52 项）与资料室（materials/），逐项核验、识别跨文件矛盾、生成补件问询与重点问题，并输出 4 件机器可读交付物。全部依赖离线打包，无需联网安装。",
+  "authors": [
+    {"name": "vickywu97"}
+  ],
+  "license": "MIT",
+  "agents": [
+    {"name": "legal-dd-verify-main-agent", "file": "agents/main-agent.md"}
+  ],
+  "model": {
+    "provider": "workbuddy-builtin",
+    "externalModelForbidden": true,
+    "note": "本方案仅使用运行环境提供的模型；不通过 API、网页端、插件或远程 MCP 调用任何外部模型或远程推理服务，亦不将资料或成果发送出运行目录。"
+  },
+  "requires": {
+    "python": ">=3.8"
+  },
+  "entrypoint": "agents/main-agent.md"
+}

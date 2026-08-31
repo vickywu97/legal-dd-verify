@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+.DS_Store
+
+# Generated deliverables (regenerated at runtime; examples/ is the canonical sample)
+deliverables/
+output/
+
+# Local env / OS
+.venv/
+venv/
+*.egg-info/
