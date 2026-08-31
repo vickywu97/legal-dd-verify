@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+# Read-only token is sufficient; the workflow only runs the offline smoke test.
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: Smoke test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # The pipeline vendors its deps under vendor/ and needs no `pip install`,
+      # no network, and no external services. The smoke test runs the full
+      # extract -> analyze -> render -> verify pipeline on the bundled original
+      # demo data room and asserts the independent verifier returns RESULT: PASS.
+      - name: Run end-to-end smoke test (offline, zero pip)
+        run: python3 tests/smoke_test.py

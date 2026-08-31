@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>legal-dd-verify · 法律尽职调查资料核验流水线</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1a1a1a; --muted: #5b6470; --line: #e3e8ef;
+    --brand: #1f6feb; --brand-soft: #eaf2ff; --ok: #1a7f37; --warn: #9a6700;
+    --code-bg: #f4f6fa;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.65; font-size: 16px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 24px; margin-bottom: 32px; }
+  h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: -0.02em; }
+  .sub { color: var(--muted); font-size: 16px; margin: 0 0 16px; }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 600; border: 1px solid var(--line);
+    background: var(--brand-soft); color: var(--brand);
+  }
+  .badge.mit { background: #fff7e6; color: var(--warn); border-color: #f5e2b3; }
+  .badge.py  { background: #eaf7ee; color: var(--ok); border-color: #bfe6ca; }
+  h2 { font-size: 21px; margin: 40px 0 12px; padding-top: 8px; border-top: 1px solid var(--line); }
+  h3 { font-size: 16px; margin: 22px 0 8px; }
+  p { margin: 10px 0; }
+  a { color: var(--brand); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, pre { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; }
+  code { background: var(--code-bg); padding: 2px 6px; border-radius: 5px; font-size: 14px; }
+  pre {
+    background: var(--code-bg); padding: 16px; border-radius: 10px; overflow: auto;
+    font-size: 13.5px; line-height: 1.5; border: 1px solid var(--line);
+  }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 15px; }
+  th, td { text-align: left; padding: 9px 12px; border: 1px solid var(--line); vertical-align: top; }
+  th { background: #f7f9fc; font-weight: 600; }
+  .note {
+    background: #fbfcfe; border: 1px solid var(--line); border-left: 4px solid var(--brand);
+    padding: 12px 16px; border-radius: 8px; margin: 16px 0; font-size: 14.5px; color: var(--muted);
+  }
+  .warn {
+    background: #fff8f0; border: 1px solid #f3d8b6; border-left: 4px solid var(--warn);
+    padding: 12px 16px; border-radius: 8px; margin: 16px 0; font-size: 14.5px;
+  }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 13.5px; }
+  .pill { display:inline-block; background:#eaf2ff; color:#1f6feb; border-radius:6px;
+    padding:1px 7px; font-size:13px; font-weight:600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>legal-dd-verify</h1>
+    <p class="sub">法律尽职调查资料核验与补件反馈流水线 · A data-driven legal due-diligence verification pipeline</p>
+    <div class="badges">
+      <span class="badge">CI: GitHub Actions</span>
+      <span class="badge mit">License: MIT</span>
+      <span class="badge py">Python 3.11 / 3.13</span>
+      <span class="badge">Offline · zero pip</span>
+    </div>
+  </header>
+
+  <p><strong>legal-dd-verify</strong> 读取一份尽职调查核查清单与一个虚拟资料室（VDR），
+  逐项核验资料提供情况、识别<strong>跨文件矛盾</strong>、生成补件问询与重点问题，并输出
+  <span class="pill">4 件机器可读交付物</span>。
+  整条流水线<strong>离线运行、零依赖安装</strong>：依赖已随包 vendored 于 <code>vendor/</code>，
+  运行期无需 <code>pip install</code>、无需联网。</p>
+
+  <div class="note">
+    本仓库是一个<strong>完整、可运行的工作示例（reference implementation）</strong>，绑定一份
+    <strong>从零原创</strong>的虚构演示数据室（"云栖智联科技股份有限公司"）与一份通用核查清单。
+    全部主体、人员、合同、账号、地址与交易数据均为合成信息，与任何真实主体、真实项目或第三方题库无关。
+  </div>
+
+  <h2>它解决什么问题</h2>
+  <p>尽职调查里最容易被低估的工作量，是把目标公司扔过来的一大堆 PDF / XLSX / DOCX 资料，
+  和一份长长的核查清单，逐条对上：</p>
+  <ul>
+    <li>这份资料<strong>提供了没有</strong>？提供到什么程度（已满足 / 部分满足 / 未满足）？</li>
+    <li>不同文件之间<strong>说法是否打架</strong>？（章程写持股 10%、台账写 8%；隐私政策说无数据出境、云账单却显示新加坡节点含个人信息）</li>
+    <li>哪些<strong>索赔 / 争议被漏列</strong>进争议清单？</li>
+    <li>还<strong>缺哪些资料</strong>、需要向对方发补件问询？</li>
+  </ul>
+  <p><code>legal-dd-verify</code> 把这些动作固化成一条可复现的流水线，让律师把精力放在"判断与谈判"上，而不是"翻文件和填表"上。</p>
+
+  <h2>流水线结构</h2>
+  <table>
+    <tr><th>阶段</th><th>模块</th><th>职责</th></tr>
+    <tr><td>抽取</td><td><code>pipeline/extract.py</code></td><td>读取 PDF / XLSX / DOCX（或离线 <code>.txt</code> 抽取视图），按稳定的 <code>XX.Y</code> 文档前缀建立资料库</td></tr>
+    <tr><td>分析</td><td><code>pipeline/analyze.py</code></td><td>52 项核验 + 结构化跨文件矛盾检测（非写死答案）</td></tr>
+    <tr><td>渲染</td><td><code>pipeline/render.py</code></td><td>生成 4 件交付物</td></tr>
+    <tr><td>校验</td><td><code>pipeline/verify.py</code></td><td>独立校验器，反向解析引用、校验枚举与核心风险覆盖</td></tr>
+    <tr><td>编排</td><td><code>pipeline/run.py</code></td><td>串联四层引擎，支持 <code>--verify</code> 自检</td></tr>
+  </table>
+
+  <h2>交付物</h2>
+  <table>
+    <tr><th>文件</th><th>内容</th></tr>
+    <tr><td><code>尽调清单核验与反馈表.xlsx</code></td><td>52 项逐条核验：状态 / 事实摘要 / 证据定位（精确到文件）/ 资料缺口 / 风险等级 / 处置类型 / 是否需人工复核</td></tr>
+    <tr><td><code>补件问询清单.xlsx</code></td><td>去重后的补件问询，含类型与依据</td></tr>
+    <tr><td><code>重点问题摘要.docx</code></td><td>交易及审阅范围 / 执行摘要 / 跨文件矛盾 / 核验统计 / 重点问题 / 优先补件与下一步</td></tr>
+    <tr><td><code>result_manifest.json</code></td><td>机器可读清单：items / key_issues / cross_file_contradictions</td></tr>
+  </table>
+
+  <h2>快速开始</h2>
+  <pre># 克隆后，无需 pip install、无需联网
+cd legal-dd-verify
+
+# 端到端运行（抽取 → 分析 → 渲染 → 校验）
+python3 pipeline/run.py \
+  --input materials \
+  --checklist checklist/checklist_52.json \
+  --out out \
+  --verify
+
+# 仅运行离线冒烟测试（GitHub CI 同款命令）
+python3 tests/smoke_test.py</pre>
+  <p>期望输出包含 <code>RESULT: PASS</code>：52 项唯一、3 处结构矛盾、4 类核心风险全覆盖、0 未解析引注。</p>
+
+  <h2>诚实边界</h2>
+  <div class="warn">
+    <ul style="margin:8px 0;">
+      <li>本仓库为<strong>方法论可运行示例</strong>，绑定原创合成演示数据室；演示数据室与任何真实主体 / 项目 / 第三方题库无关。</li>
+      <li>输出为<strong>律师支持性分析</strong>，非独立法律意见，不替代对登记机关、主管机关及相对方的独立核验。</li>
+      <li>引擎<strong>绑定演示数据室文档结构</strong>；用于不同文档结构的真实项目需扩展事实抽取与矛盾检测规则。它并非"开箱即用的通用产品"。</li>
+    </ul>
+  </div>
+
+  <h2>许可证与作者</h2>
+  <p>本仓库以 <strong>MIT License</strong> 发布（详见 <code>LICENSE</code>）。</p>
+  <p>作者：<strong>vickywu97</strong>（律师 · 税务师 · 专利代理师，法律实务经验六年；现从事 AI 法律产品方向）。</p>
+  <p>联系：<a href="https://www.linkedin.com/in/wuyitong">LinkedIn</a> · <a href="mailto:vickywu97@163.com">vickywu97@163.com</a></p>
+  <p>源码：<a href="https://github.com/vickywu97/legal-dd-verify">github.com/vickywu97/legal-dd-verify</a></p>
+
+  <footer>
+    legal-dd-verify · MIT License · 原创合成演示数据室，与任何真实主体 / 第三方题库无关。
+  </footer>
+</div>
+</body>
+</html>
