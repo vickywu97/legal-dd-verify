@@ -14,7 +14,6 @@ import openpyxl
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.utils import get_column_letter
 from _docx import DocxDocument
-import profile
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(os.path.dirname(BASE), "deliverables_v2")
@@ -49,7 +48,7 @@ def style_header(ws, row, ncol):
         cell.alignment = CENTER; cell.border = BORDER
 
 # ---------------------------------------------------------------------------
-def render(res, checklist, store, out_dir=None):
+def render(res, checklist, store, scenario=None, out_dir=None):
     if out_dir:
         set_out_dir(out_dir)
     items = res["items"]; feedback = res["feedback"]; kis = res["key_issues"]
@@ -57,9 +56,11 @@ def render(res, checklist, store, out_dir=None):
     fb_by_id = {f["fid"]: f for f in feedback}
     meta = res.get("meta", {})
     TARGET = meta.get("target_name") or "目标公司（见登记档案）"
-    BASELINE = meta.get("baseline_date") or BASELINE_DATE
+    BASELINE = meta.get("baseline_date") or (scenario.baseline_date if scenario else BASELINE_DATE)
     MATN = meta.get("material_count") or len(store.by_prefix)
     IID = meta.get("instance_id") or "instance"
+    ACQUIRER = scenario.acquirer if scenario else "买方（见交易文件）"
+    DEAL_PCT = scenario.deal_pct if scenario else ""
     ORDER = list(checklist)  # stable checklist order
     # ensure all 52 present
     ORDER = [it["id"] for it in checklist]
@@ -190,12 +191,12 @@ def render(res, checklist, store, out_dir=None):
     # ============ 3) 重点问题摘要.docx ============
     doc = DocxDocument()
     doc.add_heading(f"{TARGET}｜法律尽职调查第一轮资料核验与重点问题摘要", level=0)
-    doc.add_paragraph(f"提交对象：{profile.ACQUIRER}项目组（买方律师团队复核用，非正式法律意见）")
-    doc.add_paragraph(f"目标公司：{TARGET}　|　交易：受让{profile.DEAL_PCT}%股权并取得控制权　|　基准日：{BASELINE}")
+    doc.add_paragraph(f"提交对象：{ACQUIRER}项目组（买方律师团队复核用，非正式法律意见）")
+    doc.add_paragraph(f"目标公司：{TARGET}　|　交易：受让{DEAL_PCT}%股权并取得控制权　|　基准日：{BASELINE}")
     doc.add_paragraph(f"资料范围：虚拟数据室 VDR（第一轮，{MATN}份资料）　|　核验清单：{len(ORDER)}项")
     doc.add_heading("一、交易及审阅范围", level=1)
     doc.add_paragraph(
-     f"买方（{profile.ACQUIRER}）拟受让目标公司{profile.DEAL_PCT}%股权并取得控制权。本轮审阅为目标公司第一轮资料（VDR v0.6），"
+     f"买方（{ACQUIRER}）拟受让目标公司{DEAL_PCT}%股权并取得控制权。本轮审阅为目标公司第一轮资料（VDR v0.6），"
      "覆盖主体资格与历史沿革、股权与公司治理、重大合同与融资、知识产权与信息技术、劳动人事、"
      "数据合规与业务资质、争议债务与保险、物业与其他共八个领域。全部主体、人员、合同、账号、"
      "地址与交易数据均为虚构合成信息。")

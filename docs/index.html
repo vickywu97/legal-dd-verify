@@ -117,20 +117,22 @@
     <tr><td><code>result_manifest.json</code></td><td>机器可读清单：items / key_issues / cross_file_contradictions</td></tr>
   </table>
 
+  <h2>多场景可切换演示数据室</h2>
+  <p>引擎是<strong>数据驱动</strong>的：演示数据室只是一份符合文档 schema 的虚构资料集合，切换数据室即可让同一引擎重新推导全部结论。内置两个<strong>完全独立、无共享专有名词</strong>的原创合成数据室：<code>cloudlink</code>（云栖智联 SaaS）与 <code>hanwei_semi</code>（瀚微半导体 / 半导体 AI 芯片），各自植入不同的三类结构性问题。</p>
+
   <h2>快速开始</h2>
   <pre># 克隆后，无需 pip install、无需联网
 cd legal-dd-verify
 
-# 端到端运行（抽取 → 分析 → 渲染 → 校验）
-python3 pipeline/run.py \
-  --input materials \
-  --checklist checklist/checklist_52.json \
-  --out out \
-  --verify
+# 端到端运行（抽取 → 分析 → 渲染 → 校验）—— 默认场景
+python3 pipeline/run.py --scenario cloudlink --out out --verify
 
-# 仅运行离线冒烟测试（GitHub CI 同款命令）
+# 切换到半导体场景（自包含于 scenarios/hanwei_semi/）
+python3 pipeline/run.py --scenario scenarios/hanwei_semi --out out2 --verify
+
+# 仅运行离线冒烟测试（GitHub CI 同款命令，覆盖全部内置场景）
 python3 tests/smoke_test.py</pre>
-  <p>期望输出包含 <code>RESULT: PASS</code>：52 项唯一、3 处结构矛盾、4 类核心风险全覆盖、0 未解析引注。</p>
+  <p>期望输出包含 <code>RESULT: PASS</code>：52 项唯一、3 处结构矛盾、4 类核心风险全覆盖、0 未解析引注（每个场景均如此）。</p>
 
   <h2>诚实边界</h2>
   <div class="warn">

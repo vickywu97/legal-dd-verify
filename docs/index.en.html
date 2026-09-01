@@ -121,21 +121,26 @@
     <tr><td><code>result_manifest.json</code></td><td>Machine-readable list: items / key_issues / cross_file_contradictions</td></tr>
   </table>
 
+  <h2>Switchable demo data rooms</h2>
+  <p>The engine is <strong>data-driven</strong>: a demo data room is just a synthetic document set conforming to the
+  schema; switching it makes the same engine re-derive every conclusion. Two <strong>fully independent,
+  proper-noun-disjoint</strong> synthetic data rooms are bundled — <code>cloudlink</code> (Yunqi SaaS) and
+  <code>hanwei_semi</code> (Hanwei Semiconductor / AI chips) — each with its own three planted structural issues.</p>
+
   <h2>Quick start</h2>
   <pre># After clone — no pip install, no network
 cd legal-dd-verify
 
-# End-to-end run (extract -> analyze -> render -> verify)
-python3 pipeline/run.py \
-  --input materials \
-  --checklist checklist/checklist_52.json \
-  --out out \
-  --verify
+# End-to-end run (extract -> analyze -> render -> verify) — default scenario
+python3 pipeline/run.py --scenario cloudlink --out out --verify
 
-# Offline smoke test (same command as GitHub CI)
+# Switch to the semiconductor scenario (self-contained under scenarios/hanwei_semi/)
+python3 pipeline/run.py --scenario scenarios/hanwei_semi --out out2 --verify
+
+# Offline smoke test (same command as GitHub CI; covers every bundled scenario)
 python3 tests/smoke_test.py</pre>
   <p>Expected output includes <code>RESULT: PASS</code>: 52 unique items, 3 structural contradictions,
-  4 core-risk categories fully covered, 0 unresolved citations.</p>
+  4 core-risk categories fully covered, 0 unresolved citations (for every scenario).</p>
 
   <h2>Honest boundaries</h2>
   <div class="warn">

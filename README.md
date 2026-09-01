@@ -76,14 +76,31 @@
 # 1) 进入流水线目录
 cd pipeline
 
-# 2) 用绑定的原创演示数据室跑通整条链路，并运行独立校验器
-python3 run.py --out ../examples --verify
+# 2) 用默认演示数据室（云栖智联）跑通整条链路，并运行独立校验器
+python3 run.py --scenario cloudlink --out ../examples --verify
 ```
+
+### 多场景可切换演示数据室
+
+引擎是**数据驱动**的：演示数据室只是一份符合文档 schema 的虚构资料集合，切换数据室即可让同一引擎重新推导全部结论。仓库内置两个**完全独立、无共享专有名词**的原创合成数据室：
+
+| 场景 key | 公司（虚构） | 行业 | 植入的三类结构性问题 |
+|---|---|---|---|
+| `cloudlink`（默认） | 云栖智联科技股份有限公司 | 企业 SaaS / 数据合规 | 股权比例 8%↔10%、新加坡节点数据跨境、供应商丙索赔漏列 |
+| `hanwei_semi` | 瀚微半导体（苏州）有限公司 | 半导体 / AI 芯片 | 股权比例 12%↔15%、香港节点数据跨境、晶元科技索赔漏列 |
+
+```bash
+# 切换到半导体场景（自包含于 scenarios/hanwei_semi/）
+python3 run.py --scenario ../scenarios/hanwei_semi --out /tmp/hanwei --verify
+```
+
+新增你自己的场景：复制 `scenarios/hanwei_semi/` 目录，替换其中的 `materials/`（保持 `XX.Y` 文档前缀与表格列名 schema）、`profile.json`（买方 / 受让比例 / 基准日）、`scenario.json`（展示名与说明），再运行 `python3 run.py --scenario <你的目录>` 即可。生成脚本 `scenarios/hanwei_semi/gen.py` 可复现该数据室，证明其为合成来源。
 
 可选：指向你自己的资料室与清单（清单支持 JSON 或 XLSX）：
 
 ```bash
 python3 run.py \
+  --scenario <key|path> \
   --input   /path/to/your/materials \
   --checklist /path/to/your/checklist_52.json \
   --out     /path/to/output \
@@ -103,9 +120,11 @@ legal-dd-verify/
 │   ├── verify.py       # 独立一致性校验器（不依赖分析引擎）
 │   ├── profile.py      # 交易框架常量（买方 / 受让比例 / 基准日）
 │   └── run.py          # 一键编排 + 可选 --verify
-├── materials/          # 绑定的原创合成演示数据室（29 份 .txt 抽取视图）
+├── scenarios/           # 可切换的演示数据室（每个为自包含的合成资料集合）
+│   └── hanwei_semi/    # 半导体场景：materials/ + profile.json + checklist.json + scenario.json + gen.py
+├── materials/          # 默认场景（cloudlink）绑定的原创合成演示数据室（29 份 .txt 抽取视图）
 ├── checklist/          # 52 项通用核查清单 checklist_52.json
-├── examples/           # 绑定演示数据室的运行结果（已通过校验）
+├── examples/           # 默认演示数据室的运行结果（已通过校验）
 ├── evaluation/         # 独立校验器入口与说明
 ├── vendor/             # 离线 vendored 依赖（pypdf / openpyxl / et_xmlfile）
 ├── _docx.py            # 纯标准库 .docx 读写（替代 python-docx）

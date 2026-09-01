@@ -50,6 +50,8 @@ def cite_list(store, specs):
 # Per-instance configuration (set once per engagement; NOT an extracted answer).
 # The acquirer / deal structure / baseline date are constants of the task design
 # and are identical across A/B volumes, so they are intentionally not "answers".
+# The baseline date is supplied per-scenario (Scenario.baseline_date); this module
+# default is only a fallback for direct `analyze.run()` calls without a scenario.
 BASELINE_DATE = "2026-07-15"
 
 _COMPANY_RE = re.compile(r"([一-龥]{4,}(?:科技有限公司|有限公司|合伙企业|股份公司|有限责任公司))")
@@ -73,7 +75,7 @@ def find_target_name(store, facts=None):
 # ============================================================================
 # Contradiction detection (structural, instance-agnostic)
 # ============================================================================
-def detect_contradictions(store, facts):
+def detect_contradictions(store, facts, baseline_date=BASELINE_DATE):
     out = []
 
     # ---- CT-01: equity ratio conflict across documents ----
@@ -197,7 +199,7 @@ def _prefixes(it):
     vdr = it.get("vdr", "") or ""
     return [p.strip() for p in re.split(r"[；;]", vdr) if re.match(r"\d{2}\.\d+", p.strip())]
 
-def analyze_one(it, store, facts, contradictions):
+def analyze_one(it, store, facts, contradictions, baseline_date=BASELINE_DATE):
     iid = it["id"]
     domain = iid.split("-")[0]
     prefs = _prefixes(it)
@@ -231,7 +233,7 @@ def analyze_one(it, store, facts, contradictions):
                      "", human="否")
 
     # generic presence-based analysis with extracted highlights
-    status, fact, ev, gap = _generic_findings(iid, domain, store, facts, present, it)
+    status, fact, ev, gap = _generic_findings(iid, domain, store, facts, present, it, baseline_date)
     disp = DOM_DISP[domain]
     # Evidence-driven risk (no blanket HIGH):
     #   已满足   -> LOW residual
@@ -252,7 +254,7 @@ def analyze_one(it, store, facts, contradictions):
     human = "是" if status in ("资料冲突","未满足") or risk == "HIGH" else "否"
     return _item(iid, domain, it, status, fact, ev, gap, risk, disp, "", human=human)
 
-def _generic_findings(iid, domain, store, facts, present, it):
+def _generic_findings(iid, domain, store, facts, present, it, baseline_date=BASELINE_DATE):
     """Return (status, fact, evidence_list, gap) using extracted values."""
     ev = []
     highlights = []
@@ -316,7 +318,7 @@ def _generic_findings(iid, domain, store, facts, present, it):
         ev.append(cite(store, "06.3", r"许可证|有效期|到期"))
         licno = re.search(r"(苏B2-\d+|[A-Za-z]?B2-\d+)", lic)
         exp = re.search(r"有效期至\s*(\d{4}-\d{2}-\d{2})", lic)
-        cutoff = BASELINE_DATE
+        cutoff = baseline_date
         expired = exp and exp.group(1) < cutoff
         if licno or exp:
             note = "（已过期，仍经营SaaS）" if expired else ""
@@ -498,12 +500,13 @@ def build_key_issues(items, contradictions, facts, store):
 # ============================================================================
 # Orchestrator
 # ============================================================================
-def run(store, checklist):
+def run(store, checklist, scenario=None):
+    baseline_date = scenario.baseline_date if scenario else BASELINE_DATE
     facts = build_facts(store)
-    contradictions = detect_contradictions(store, facts)
+    contradictions = detect_contradictions(store, facts, baseline_date)
     items = {}
     for it in checklist:
-        items[it["id"]] = analyze_one(it, store, facts, contradictions)
+        items[it["id"]] = analyze_one(it, store, facts, contradictions, baseline_date)
     # link feedback ids to items
     feedback = build_feedback(items, contradictions, facts)
     fb_by_id = {f["fid"]: f for f in feedback}
@@ -521,7 +524,7 @@ def run(store, checklist):
     key_issues = build_key_issues(items, contradictions, facts, store)
     meta = dict(
         target_name=find_target_name(store, facts),
-        baseline_date=BASELINE_DATE,
+        baseline_date=baseline_date,
         material_count=len(store.by_prefix),
     )
     return dict(items=items, contradictions=contradictions, feedback=feedback,

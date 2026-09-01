@@ -1,5 +1,13 @@
 # legal-dd-verify — Release Notes
 
+## v1.1.0 (multi-scenario demo data rooms)
+
+- **多场景可切换演示数据室**：新增 `scenarios/` 注册机制与 `run.py --scenario <key|path>`。仓库内置两个**完全独立、无共享专有名词**的原创合成数据室——`cloudlink`（默认，云栖智联 SaaS）与 `hanwei_semi`（瀚微半导体，半导体 / AI 芯片）。二者植入不同的三类结构性问题（股权比例冲突、数据跨境表述 vs 云架构、供应商索赔漏列），同一引擎分别重新推导全部结论，均通过独立校验器（52 项 / 12 重点问题 / 3 矛盾 / 4 核心风险 / 0 未解析引注）。
+- `pipeline/scenario.py`：场景注册表 + `Scenario` 对象（资料目录 / 清单 / 交易框架常量 / 元数据）。默认 `cloudlink` 向后兼容（仍指向仓库根 `materials/` + `checklist/` + `pipeline/profile.py`）。
+- `analyze.py` / `render.py` 改为按场景注入 `baseline_date` 与交易框架（买方 / 受让比例），不再依赖全局常量；默认输出与 v1.0.0 字节一致。
+- `tests/smoke_test.py` 扩展为对**每个**内置场景跑通整链并断言 `RESULT: PASS`。
+- `scenarios/hanwei_semi/gen.py` 可复现该数据室，证明其为合成来源。
+
 ## v1.0.0 (initial release)
 
 首个公开版本：一个**数据驱动**的法律尽职调查资料核验流水线，绑定一份**完全原创、合成**的演示数据室（"云栖智联科技股份有限公司"，29 份资料），端到端可复现。

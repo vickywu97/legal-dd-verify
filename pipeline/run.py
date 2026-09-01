@@ -119,24 +119,34 @@ def load_checklist(path):
 def main():
     ap = argparse.ArgumentParser(description="Legal due-diligence verification pipeline")
     _sub = os.path.dirname(HERE)
-    ap.add_argument("--input", default=os.path.join(_sub, "materials"),
-                    help="data-room directory (defaults to the bundled materials/ demo)")
-    ap.add_argument("--checklist", default=os.path.join(_sub, "checklist", "checklist_52.json"),
-                    help="52-item checklist xlsx or json")
+    ap.add_argument("--input", default=None,
+                    help="data-room directory (defaults to the selected scenario's materials/)")
+    ap.add_argument("--checklist", default=None,
+                    help="52-item checklist xlsx or json (defaults to the selected scenario's checklist)")
+    ap.add_argument("--scenario", default="cloudlink",
+                    help="built-in scenario key (e.g. cloudlink) or path to a scenario directory")
     ap.add_argument("--out", default=None, help="output directory for the 4 deliverables")
     ap.add_argument("--verify", action="store_true", help="run the independent verifier after render")
     args = ap.parse_args()
 
     ensure_deps()  # vendored; no-op (no network)
 
+    from scenario import load as load_scenario
     from extract import Store
     from analyze import run as analyze_run
     from render import render as render_deliverables
 
-    input_dir = args.input or discover_input()
+    scn = load_scenario(args.scenario)
+    print("Scenario:", scn.display_name)
+
+    input_dir = args.input or scn.materials_dir
+    if not input_dir or not os.path.isdir(input_dir):
+        input_dir = discover_input()
     if not input_dir or not os.path.isdir(input_dir):
         sys.exit("ERROR: cannot locate materials directory. Pass --input explicitly.")
-    checklist_path = args.checklist or discover_checklist(input_dir)
+    checklist_path = args.checklist or scn.checklist_path
+    if not checklist_path or not os.path.exists(checklist_path):
+        checklist_path = discover_checklist(input_dir)
     if not checklist_path or not os.path.exists(checklist_path):
         sys.exit("ERROR: cannot locate 尽调资料清单.xlsx/json. Pass --checklist explicitly.")
     out_dir = args.out or os.path.join(os.getcwd(), "deliverables")
@@ -148,8 +158,8 @@ def main():
     print("      materials parsed:", len(store.by_prefix), "| checklist items:", len(cl))
 
     print("[2/3] Analyzing (52-item verification + contradiction detection) ...")
-    res = analyze_run(store, cl)
-    res.setdefault("meta", {})["instance_id"] = "demo"
+    res = analyze_run(store, cl, scn)
+    res.setdefault("meta", {})["instance_id"] = scn.key
     print("      instance_id:", res["meta"]["instance_id"])
     print("      items=%d contradictions=%d feedback=%d key_issues=%d" % (
         len(res["items"]), len(res["contradictions"]),
@@ -158,7 +168,7 @@ def main():
         print("        -", c["cid"], c["title"], "->", c["items"])
 
     print("[3/3] Rendering 4 deliverables to:", out_dir)
-    out = render_deliverables(res, cl, store, out_dir=out_dir)
+    out = render_deliverables(res, cl, store, scn, out_dir=out_dir)
     print("      done:", out)
 
     if args.verify:
