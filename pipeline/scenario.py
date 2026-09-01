@@ -39,7 +39,7 @@ def _load_profile_py(path):
 # ---- built-in scenarios (default behaviour is repo-root compatible) ---------
 BUILTINS = {
     "cloudlink": {
-        "display_name": "云栖智联科技股份有限公司（企业 SaaS / 数据合规）",
+        "display_name": "霁川智链科技股份有限公司（企业 SaaS / 数据合规）",
         "sector": "企业 SaaS / 数据合规",
         "blurb": "原版演示数据室：虚构 SaaS 公司的第一轮资料，植入股权比例冲突、数据跨境表述与云架构矛盾、供应商索赔漏列三类结构性问题。",
         "materials_dir": os.path.join(ROOT, "materials"),

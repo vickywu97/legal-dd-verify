@@ -13,7 +13,7 @@ buried in render.py) makes the "input vs. constant" boundary auditable and
 keeps output free of instance-specific proper nouns.
 """
 # Fictional buyer used in the bundled demo scenario (synthetic; not a real entity).
-ACQUIRER = "远图数字产业投资（上海）有限公司"
+ACQUIRER = "砚光数字产业投资（上海）有限公司"
 
 # Fictional stake percentage in the bundled demo scenario.
 DEAL_PCT = 65
